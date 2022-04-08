@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from config.default import SQLALCHEMY_DATABASE_URI
 
-engne = create_engine(
+engine = create_engine(
     SQLALCHEMY_DATABASE_URI,
     pool_size=30,
     max_overflow=20,
@@ -12,12 +12,12 @@ engne = create_engine(
 )
 
 db = scoped_session(sessionmaker(
-    autocommit=False, autoflush=False, bind=engne))
+    autocommit=False, autoflush=False, bind=engine))
 
 Base = declarative_base()
 Base.query = db.query_property()
 
 
-def init_db():
+def init_db() -> None:
     from . import models
-    Base.metadata.create_all(bind=engne)
+    Base.metadata.create_all(bind=engine)

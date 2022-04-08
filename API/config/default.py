@@ -12,5 +12,7 @@ ENV = ''
 
 UPLOAD_FOLDER_DEST = os.getenv('UPLOAD')
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE')
-SECRET_KEY = os.urandom(24)
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+JWT_AUTH_URL_RULE = '/api/v1.0.0/login'
